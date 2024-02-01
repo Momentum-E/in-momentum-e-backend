@@ -15,7 +15,27 @@ import {
   DeleteUserCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 
+import authenticateToken from "../middlewares/authenticateToken.js";
+
 import { calculateSecretHash } from "../utils/secretHashCalculate.js";
+
+import users from "../DB/userDB.js";
+
+import fs from "fs";
+
+function saveUsersToFile() {
+  fs.writeFile(
+    "./DB/userDB.js",
+    `const users = ${JSON.stringify(users, null, 2)}; export default users;`,
+    (err) => {
+      if (err) {
+        console.error("Error writing users to file:", err);
+      } else {
+        console.log("Users saved to file successfully");
+      }
+    }
+  );
+}
 
 const router = express.Router();
 configDotenv();
@@ -68,6 +88,9 @@ router.post("/confirm-sign-up", async (req, res) => {
 
   try {
     await cognitoClient.send(confirmSignUpCommand);
+    // Save the user's username as email in the users database
+    users.push({ email: username, vehicles: [] });
+    saveUsersToFile();
     return res.status(200).json({ message: "Confirmation successful" });
   } catch (err) {
     return res
@@ -91,9 +114,13 @@ router.post("/resend-confirmation-code", async (req, res) => {
 
   try {
     await cognitoClient.send(resendConfirmationCodeCommand);
-    return res.status(200).json({ message: "Confirmation code resent successfully" });
+    return res
+      .status(200)
+      .json({ message: "Confirmation code resent successfully" });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to resend confirmation code" });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to resend confirmation code" });
   }
 });
 
@@ -102,7 +129,7 @@ router.post("/resend-confirmation-code", async (req, res) => {
 router.post("/initiate-auth", async (req, res) => {
   const { username, password } = req.body;
   const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
-
+  console.log(secret);
   const initiateAuthCommand = new InitiateAuthCommand({
     AuthFlow: "USER_PASSWORD_AUTH", // Specify the authentication flow
     ClientId: CLIENT_ID,
@@ -115,11 +142,18 @@ router.post("/initiate-auth", async (req, res) => {
 
   try {
     const authResult = await cognitoClient.send(initiateAuthCommand);
-
+    // console.log("auth result", authResult);
+    // console.log("------------")
     // Set HttpOnly cookies for tokens
-    res.cookie('accessToken', authResult.AuthenticationResult.AccessToken, { httpOnly: true });
-    res.cookie('idToken', authResult.AuthenticationResult.IdToken, { httpOnly: true });
-    res.cookie('refreshToken', authResult.AuthenticationResult.RefreshToken, { httpOnly: true });
+    res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
+      httpOnly: true,
+    });
+    res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
+      httpOnly: true,
+    });
+    res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
+      httpOnly: true,
+    });
 
     // Respond with a success status
     res.status(200).json({ success: true });
@@ -130,18 +164,19 @@ router.post("/initiate-auth", async (req, res) => {
   }
 });
 
-router.post('/refresh-auth', async (req, res) => {
-  const { username } = req.body;
+router.post("/refresh-auth", async (req, res) => {
+  const { userId } = req.body;
+  console.log("ref", userId);
 
   // Extract refreshToken from cookies
   const refreshToken = req.cookies.refreshToken;
   console.log(refreshToken);
 
   // Calculate secret hash
-  const secretHash = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
+  const secretHash = calculateSecretHash(userId, CLIENT_ID, CLIENT_SECRET);
   console.log(secretHash);
   const initiateAuthCommand = new InitiateAuthCommand({
-    AuthFlow: 'REFRESH_TOKEN_AUTH',
+    AuthFlow: "REFRESH_TOKEN_AUTH",
     ClientId: CLIENT_ID,
     AuthParameters: {
       REFRESH_TOKEN: refreshToken,
@@ -153,9 +188,15 @@ router.post('/refresh-auth', async (req, res) => {
     const authResult = await cognitoClient.send(initiateAuthCommand);
 
     // Assuming you want to store the new tokens in cookies for subsequent requests
-    res.cookie('accessToken', authResult.AuthenticationResult.AccessToken, { httpOnly: true });
-    res.cookie('idToken', authResult.AuthenticationResult.IdToken, { httpOnly: true });
-    res.cookie('refreshToken', authResult.AuthenticationResult.RefreshToken, { httpOnly: true });
+    res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
+      httpOnly: true,
+    });
+    res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
+      httpOnly: true,
+    });
+    res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
+      httpOnly: true,
+    });
 
     return res.status(200).json({
       accessToken: authResult.AuthenticationResult.AccessToken,
@@ -163,14 +204,15 @@ router.post('/refresh-auth', async (req, res) => {
       refreshToken: authResult.AuthenticationResult.RefreshToken,
     });
   } catch (err) {
-    return res.status(500).json({ error: err.message || 'Authentication failed' });
+    return res
+      .status(500)
+      .json({ error: err.message || "Authentication failed" });
   }
 });
 
 // log out/sign out
 // Global Sign Out Route
-router.post("/global-sign-out", async (req, res) => {
-
+router.post("/global-sign-out", authenticateToken, async (req, res) => {
   // Retrieve the access token from the cookie
   const accessToken = req.cookies.accessToken;
   // console.log(accessToken);
@@ -195,9 +237,10 @@ router.post("/global-sign-out", async (req, res) => {
 });
 
 // Get User Route
+// router.post("/get-user", authenticateToken, async (req, res) => {
 router.post("/get-user", async (req, res) => {
   const accessToken = req.cookies.accessToken;
-  
+
   const getUserCommand = new GetUserCommand({
     AccessToken: accessToken,
   });
@@ -205,13 +248,16 @@ router.post("/get-user", async (req, res) => {
   try {
     const result = await cognitoClient.send(getUserCommand);
     // Extract user attributes and metadata from the result
-    console.log("result:", result);
-    const userAttributes = result.UserAttributes;
-    const username = result.Username; 
+    // console.log("result:", result);
+    const email = result.UserAttributes[0].Value;
+    const userId = result.Username;
+    // console.log("getuser", res);
 
-    return res.status(200).json({ userAttributes, username });
+    return res.status(200).json({ email, userId });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to get user information" });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to get user information" });
   }
 });
 
@@ -231,9 +277,15 @@ router.post("/forgot-password", async (req, res) => {
   try {
     const response = await cognitoClient.send(forgotPasswordCommand);
     console.log(response);
-    return res.status(200).json({ message: "Forgot password request initiated successfully" });
+    return res
+      .status(200)
+      .json({ message: "Forgot password request initiated successfully" });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to initiate forgot password request" });
+    return res
+      .status(500)
+      .json({
+        error: err.message || "Failed to initiate forgot password request",
+      });
   }
 });
 
@@ -254,14 +306,18 @@ router.post("/confirm-forgot-password", async (req, res) => {
 
   try {
     await cognitoClient.send(confirmForgotPasswordCommand);
-    return res.status(200).json({ message: "Password reset confirmed successfully" });
+    return res
+      .status(200)
+      .json({ message: "Password reset confirmed successfully" });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to confirm password reset" });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to confirm password reset" });
   }
 });
 
 // Change Password Route
-router.post("/change-password", async (req, res) => {
+router.post("/change-password", authenticateToken, async (req, res) => {
   const { previousPassword, proposedPassword, username } = req.body;
 
   const accessToken = req.cookies.accessToken;
@@ -279,12 +335,14 @@ router.post("/change-password", async (req, res) => {
     await cognitoClient.send(changePasswordCommand);
     return res.status(200).json({ message: "Password changed successfully" });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to change password" });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to change password" });
   }
 });
 
 // Delete User Route
-router.post("/delete-user", async (req, res) => {
+router.post("/delete-user", authenticateToken, async (req, res) => {
   const { username } = req.body;
 
   const accessToken = req.cookies.accessToken;
@@ -298,11 +356,14 @@ router.post("/delete-user", async (req, res) => {
 
   try {
     await cognitoClient.send(deleteUserCommand);
-    return res.status(200).json({ message: "User profile deleted successfully" });
+    return res
+      .status(200)
+      .json({ message: "User profile deleted successfully" });
   } catch (err) {
-    return res.status(500).json({ error: err.message || "Failed to delete user profile" });
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to delete user profile" });
   }
 });
-
 
 export default router;

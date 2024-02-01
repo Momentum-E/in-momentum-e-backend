@@ -1,0 +1,484 @@
+const vehicles = [
+  {
+    "VEHICLE_ID": "EV001",
+    "TRIP_ID": "TRIP001",
+    "TRIP_START_TIME": "2024-01-28T08:00:00",
+    "ODOMETER_START_READING": 10000,
+    "SOC_START": 80,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 60,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 50,
+    "AMBIENT_TEMPERATURE": 25,
+    "BATTERY_TEMPERATURE": 30,
+    "VEHICLE_NUMBER": "ABC123",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "123456789",
+      "ID": "IOT001"
+    },
+    "LOCATION": {
+      "LATITUDE": 37.7749,
+      "LONGITUDE": -122.4194
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV002",
+    "TRIP_ID": "TRIP002",
+    "TRIP_START_TIME": "2024-01-28T10:30:00",
+    "ODOMETER_START_READING": 12000,
+    "SOC_START": 90,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 45,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 70,
+    "AMBIENT_TEMPERATURE": 28,
+    "BATTERY_TEMPERATURE": 35,
+    "VEHICLE_NUMBER": "DEF456",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "987654321",
+      "ID": "IOT002"
+    },
+    "LOCATION": {
+      "LATITUDE": 34.0522,
+      "LONGITUDE": -118.2437
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV003",
+    "TRIP_ID": "TRIP003",
+    "TRIP_START_TIME": "2024-01-28T12:45:00",
+    "ODOMETER_START_READING": 8000,
+    "SOC_START": 75,
+    "SOC_END": 40,
+    "AVG_VELOCITY": 55,
+    "AC_ON_DURATION": 90,
+    "CHARGE_TYPE": "Level 1",
+    "DISTANCE": 40,
+    "AMBIENT_TEMPERATURE": 22,
+    "BATTERY_TEMPERATURE": 28,
+    "VEHICLE_NUMBER": "GHI789",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "456789123",
+      "ID": "IOT003"
+    },
+    "LOCATION": {
+      "LATITUDE": 40.7128,
+      "LONGITUDE": -74.0060
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV004",
+    "TRIP_ID": "TRIP004",
+    "TRIP_START_TIME": "2024-01-28T15:20:00",
+    "ODOMETER_START_READING": 15000,
+    "SOC_START": 85,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 65,
+    "AC_ON_DURATION": 150,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 80,
+    "AMBIENT_TEMPERATURE": 30,
+    "BATTERY_TEMPERATURE": 40,
+    "VEHICLE_NUMBER": "JKL012",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "789123456",
+      "ID": "IOT004"
+    },
+    "LOCATION": {
+      "LATITUDE": 51.5074,
+      "LONGITUDE": -0.1278
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV005",
+    "TRIP_ID": "TRIP005",
+    "TRIP_START_TIME": "2024-01-28T17:00:00",
+    "ODOMETER_START_READING": 20000,
+    "SOC_START": 70,
+    "SOC_END": 50,
+    "AVG_VELOCITY": 50,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 60,
+    "AMBIENT_TEMPERATURE": 20,
+    "BATTERY_TEMPERATURE": 25,
+    "VEHICLE_NUMBER": "MNO345",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "321654987",
+      "ID": "IOT005"
+    },
+    "LOCATION": {
+      "LATITUDE": 48.8566,
+      "LONGITUDE": 2.3522
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV006",
+    "TRIP_ID": "TRIP006",
+    "TRIP_START_TIME": "2024-01-28T19:30:00",
+    "ODOMETER_START_READING": 18000,
+    "SOC_START": 95,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 70,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 90,
+    "AMBIENT_TEMPERATURE": 32,
+    "BATTERY_TEMPERATURE": 38,
+    "VEHICLE_NUMBER": "PQR678",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "654987321",
+      "ID": "IOT006"
+    },
+    "LOCATION": {
+      "LATITUDE": 35.6895,
+      "LONGITUDE": 139.6917
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV007",
+    "TRIP_ID": "TRIP007",
+    "TRIP_START_TIME": "2024-01-28T21:45:00",
+    "ODOMETER_START_READING": 22000,
+    "SOC_START": 60,
+    "SOC_END": 30,
+    "AVG_VELOCITY": 45,
+    "AC_ON_DURATION": 150,
+    "CHARGE_TYPE": "Level 1",
+    "DISTANCE": 70,
+    "AMBIENT_TEMPERATURE": 18,
+    "BATTERY_TEMPERATURE": 22,
+    "VEHICLE_NUMBER": "STU901",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "987321654",
+      "ID": "IOT007"
+    },
+    "LOCATION": {
+      "LATITUDE": 40.7128,
+      "LONGITUDE": -74.0060
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV008",
+    "TRIP_ID": "TRIP008",
+    "TRIP_START_TIME": "2024-01-29T08:00:00",
+    "ODOMETER_START_READING": 25000,
+    "SOC_START": 80,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 60,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 50,
+    "AMBIENT_TEMPERATURE": 25,
+    "BATTERY_TEMPERATURE": 30,
+    "VEHICLE_NUMBER": "VWX234",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "147258369",
+      "ID": "IOT008"
+    },
+    "LOCATION": {
+      "LATITUDE": 34.0522,
+      "LONGITUDE": -118.2437
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV009",
+    "TRIP_ID": "TRIP009",
+    "TRIP_START_TIME": "2024-01-29T10:30:00",
+    "ODOMETER_START_READING": 27000,
+    "SOC_START": 90,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 45,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 70,
+    "AMBIENT_TEMPERATURE": 28,
+    "BATTERY_TEMPERATURE": 35,
+    "VEHICLE_NUMBER": "YZA567",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "369852147",
+      "ID": "IOT009"
+    },
+    "LOCATION": {
+      "LATITUDE": 37.7749,
+      "LONGITUDE": -122.4194
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV010",
+    "TRIP_ID": "TRIP010",
+    "TRIP_START_TIME": "2024-01-29T12:45:00",
+    "ODOMETER_START_READING": 30000,
+    "SOC_START": 75,
+    "SOC_END": 40,
+    "AVG_VELOCITY": 55,
+    "AC_ON_DURATION": 90,
+    "CHARGE_TYPE": "Level 1",
+    "DISTANCE": 40,
+    "AMBIENT_TEMPERATURE": 22,
+    "BATTERY_TEMPERATURE": 28,
+    "VEHICLE_NUMBER": "BCD789",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "258963147",
+      "ID": "IOT010"
+    },
+    "LOCATION": {
+      "LATITUDE": 51.5074,
+      "LONGITUDE": -0.1278
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV011",
+    "TRIP_ID": "TRIP011",
+    "TRIP_START_TIME": "2024-01-29T15:20:00",
+    "ODOMETER_START_READING": 32000,
+    "SOC_START": 85,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 65,
+    "AC_ON_DURATION": 150,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 80,
+    "AMBIENT_TEMPERATURE": 30,
+    "BATTERY_TEMPERATURE": 40,
+    "VEHICLE_NUMBER": "EFG012",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "987654321",
+      "ID": "IOT011"
+    },
+    "LOCATION": {
+      "LATITUDE": 48.8566,
+      "LONGITUDE": 2.3522
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV012",
+    "TRIP_ID": "TRIP012",
+    "TRIP_START_TIME": "2024-01-29T17:00:00",
+    "ODOMETER_START_READING": 35000,
+    "SOC_START": 70,
+    "SOC_END": 50,
+    "AVG_VELOCITY": 50,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 60,
+    "AMBIENT_TEMPERATURE": 20,
+    "BATTERY_TEMPERATURE": 25,
+    "VEHICLE_NUMBER": "HIJ345",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "135792468",
+      "ID": "IOT012"
+    },
+    "LOCATION": {
+      "LATITUDE": 35.6895,
+      "LONGITUDE": 139.6917
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV013",
+    "TRIP_ID": "TRIP013",
+    "TRIP_START_TIME": "2024-01-29T19:30:00",
+    "ODOMETER_START_READING": 38000,
+    "SOC_START": 95,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 70,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 90,
+    "AMBIENT_TEMPERATURE": 32,
+    "BATTERY_TEMPERATURE": 38,
+    "VEHICLE_NUMBER": "KLM678",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "246801357",
+      "ID": "IOT013"
+    },
+    "LOCATION": {
+      "LATITUDE": 40.7128,
+      "LONGITUDE": -74.0060
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV014",
+    "TRIP_ID": "TRIP014",
+    "TRIP_START_TIME": "2024-01-29T21:45:00",
+    "ODOMETER_START_READING": 40000,
+    "SOC_START": 60,
+    "SOC_END": 30,
+    "AVG_VELOCITY": 45,
+    "AC_ON_DURATION": 150,
+    "CHARGE_TYPE": "Level 1",
+    "DISTANCE": 70,
+    "AMBIENT_TEMPERATURE": 18,
+    "BATTERY_TEMPERATURE": 22,
+    "VEHICLE_NUMBER": "NOP901",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "369147258",
+      "ID": "IOT014"
+    },
+    "LOCATION": {
+      "LATITUDE": 37.7749,
+      "LONGITUDE": -122.4194
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV015",
+    "TRIP_ID": "TRIP015",
+    "TRIP_START_TIME": "2024-01-30T08:00:00",
+    "ODOMETER_START_READING": 42000,
+    "SOC_START": 80,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 60,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 50,
+    "AMBIENT_TEMPERATURE": 25,
+    "BATTERY_TEMPERATURE": 30,
+    "VEHICLE_NUMBER": "QRS234",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "159263478",
+      "ID": "IOT015"
+    },
+    "LOCATION": {
+      "LATITUDE": 34.0522,
+      "LONGITUDE": -118.2437
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV016",
+    "TRIP_ID": "TRIP016",
+    "TRIP_START_TIME": "2024-01-30T10:30:00",
+    "ODOMETER_START_READING": 45000,
+    "SOC_START": 90,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 45,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 70,
+    "AMBIENT_TEMPERATURE": 28,
+    "BATTERY_TEMPERATURE": 35,
+    "VEHICLE_NUMBER": "TUV567",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "753951846",
+      "ID": "IOT016"
+    },
+    "LOCATION": {
+      "LATITUDE": 51.5074,
+      "LONGITUDE": -0.1278
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV017",
+    "TRIP_ID": "TRIP017",
+    "TRIP_START_TIME": "2024-01-30T12:45:00",
+    "ODOMETER_START_READING": 48000,
+    "SOC_START": 75,
+    "SOC_END": 40,
+    "AVG_VELOCITY": 55,
+    "AC_ON_DURATION": 90,
+    "CHARGE_TYPE": "Level 1",
+    "DISTANCE": 40,
+    "AMBIENT_TEMPERATURE": 22,
+    "BATTERY_TEMPERATURE": 28,
+    "VEHICLE_NUMBER": "WXY789",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "486753219",
+      "ID": "IOT017"
+    },
+    "LOCATION": {
+      "LATITUDE": 48.8566,
+      "LONGITUDE": 2.3522
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV018",
+    "TRIP_ID": "TRIP018",
+    "TRIP_START_TIME": "2024-01-30T15:20:00",
+    "ODOMETER_START_READING": 50000,
+    "SOC_START": 85,
+    "SOC_END": 60,
+    "AVG_VELOCITY": 65,
+    "AC_ON_DURATION": 150,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 80,
+    "AMBIENT_TEMPERATURE": 30,
+    "BATTERY_TEMPERATURE": 40,
+    "VEHICLE_NUMBER": "XYZ012",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "951753286",
+      "ID": "IOT018"
+    },
+    "LOCATION": {
+      "LATITUDE": 40.7128,
+      "LONGITUDE": -74.0060
+    },
+    "CHARGING_STATUS": "Charging"
+  },
+  {
+    "VEHICLE_ID": "EV019",
+    "TRIP_ID": "TRIP019",
+    "TRIP_START_TIME": "2024-01-30T17:00:00",
+    "ODOMETER_START_READING": 53000,
+    "SOC_START": 70,
+    "SOC_END": 50,
+    "AVG_VELOCITY": 50,
+    "AC_ON_DURATION": 120,
+    "CHARGE_TYPE": "Level 2",
+    "DISTANCE": 60,
+    "AMBIENT_TEMPERATURE": 20,
+    "BATTERY_TEMPERATURE": 25,
+    "VEHICLE_NUMBER": "ABC678",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "369147258",
+      "ID": "IOT019"
+    },
+    "LOCATION": {
+      "LATITUDE": 35.6895,
+      "LONGITUDE": 139.6917
+    },
+    "CHARGING_STATUS": "Not charging"
+  },
+  {
+    "VEHICLE_ID": "EV020",
+    "TRIP_ID": "TRIP020",
+    "TRIP_START_TIME": "2024-01-30T19:30:00",
+    "ODOMETER_START_READING": 56000,
+    "SOC_START": 95,
+    "SOC_END": 70,
+    "AVG_VELOCITY": 70,
+    "AC_ON_DURATION": 180,
+    "CHARGE_TYPE": "DC Fast Charging",
+    "DISTANCE": 90,
+    "AMBIENT_TEMPERATURE": 32,
+    "BATTERY_TEMPERATURE": 38,
+    "VEHICLE_NUMBER": "DEF345",
+    "IOT_DEVICE_DETAILS": {
+      "SERIAL_NUMBER": "258369147",
+      "ID": "IOT020"
+    },
+    "LOCATION": {
+      "LATITUDE": 37.7749,
+      "LONGITUDE": -122.4194
+    },
+    "CHARGING_STATUS": "Charging"
+  }
+]
+
+export default vehicles;
