@@ -75,6 +75,7 @@ router.post("/sign-up", async (req, res) => {
 });
 
 // Confirm Sign Up Route
+// Confirm Sign Up Route
 router.post("/confirm-sign-up", async (req, res) => {
   const { confirmationCode, username } = req.body;
   const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
@@ -88,9 +89,23 @@ router.post("/confirm-sign-up", async (req, res) => {
 
   try {
     await cognitoClient.send(confirmSignUpCommand);
-    // Save the user's username as email in the users database
-    users.push({ email: username, vehicles: [] });
+
+    // Check if the user already exists in the database
+    const existingUserIndex = users.findIndex(
+      (user) => user.email === username
+    );
+
+    // If the user already exists, update their information
+    if (existingUserIndex !== -1) {
+      users[existingUserIndex] = { email: username, vehicles: [] };
+    } else {
+      // If the user doesn't exist, add them to the database
+      users.push({ email: username, vehicles: [] });
+    }
+
+    // Save the updated user database to file
     saveUsersToFile();
+
     return res.status(200).json({ message: "Confirmation successful" });
   } catch (err) {
     return res
@@ -194,9 +209,9 @@ router.post("/refresh-auth", async (req, res) => {
     res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
       httpOnly: true,
     });
-    res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
-      httpOnly: true,
-    });
+    // res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
+    //   httpOnly: true,
+    // });
 
     return res.status(200).json({
       accessToken: authResult.AuthenticationResult.AccessToken,
@@ -281,11 +296,9 @@ router.post("/forgot-password", async (req, res) => {
       .status(200)
       .json({ message: "Forgot password request initiated successfully" });
   } catch (err) {
-    return res
-      .status(500)
-      .json({
-        error: err.message || "Failed to initiate forgot password request",
-      });
+    return res.status(500).json({
+      error: err.message || "Failed to initiate forgot password request",
+    });
   }
 });
 
@@ -319,20 +332,26 @@ router.post("/confirm-forgot-password", async (req, res) => {
 // Change Password Route
 router.post("/change-password", authenticateToken, async (req, res) => {
   const { previousPassword, proposedPassword, username } = req.body;
+  console.log(previousPassword, proposedPassword, username);
 
+  // Get the access token from cookies
   const accessToken = req.cookies.accessToken;
-
-  // Calculate secret hash
-  const secretHash = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
-
-  const changePasswordCommand = new ChangePasswordCommand({
-    AccessToken: accessToken,
-    PreviousPassword: previousPassword,
-    ProposedPassword: proposedPassword,
-  });
+  console.log(!!accessToken);
 
   try {
+    // Calculate secret hash
+    const secretHash = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
+
+    // Create a ChangePasswordCommand instance
+    const changePasswordCommand = new ChangePasswordCommand({
+      AccessToken: accessToken,
+      PreviousPassword: previousPassword,
+      ProposedPassword: proposedPassword,
+    });
+
+    // Send the change password command to the cognito client
     await cognitoClient.send(changePasswordCommand);
+
     return res.status(200).json({ message: "Password changed successfully" });
   } catch (err) {
     return res
@@ -355,7 +374,16 @@ router.post("/delete-user", authenticateToken, async (req, res) => {
   });
 
   try {
+    // Delete the user from Cognito
     await cognitoClient.send(deleteUserCommand);
+
+    // Remove the user from the local database
+    const index = users.findIndex((user) => user.email === username);
+    if (index !== -1) {
+      users.splice(index, 1);
+      saveUsersToFile(); // Save the updated user database to file
+    }
+
     return res
       .status(200)
       .json({ message: "User profile deleted successfully" });
