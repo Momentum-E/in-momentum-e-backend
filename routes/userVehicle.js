@@ -45,7 +45,9 @@ router.post("/addVehicle", authenticateToken, (req, res) => {
       vehicle.IOT_DEVICE_DETAILS.SERIAL_NUMBER === serialNumber
   );
   if (existingVehicle) {
-    return res.status(400).json({ error: "Vehicle already added to the user's vehicles" });
+    return res
+      .status(400)
+      .json({ error: "Vehicle already added to the user's vehicles" });
   }
 
   // Find the vehicle
@@ -58,6 +60,15 @@ router.post("/addVehicle", authenticateToken, (req, res) => {
     return res.status(404).json({ error: "Vehicle not found" });
   }
 
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  // Format the date as YYYY-MM-DD
+  const formattedDate = `${day < 10 ? "0" : ""}${day}-${month < 10 ? "0" : ""}${month}-${year}`;
+  console.log(formattedDate);
+  vehicle.Vehicle_Info.Connected_On = formattedDate.toString();
   // Add the vehicle to the user's vehicles array
   user.vehicles.push(vehicle);
   saveUsersToFile();
@@ -65,8 +76,7 @@ router.post("/addVehicle", authenticateToken, (req, res) => {
   return res.status(200).json({ message: "Vehicle added successfully", user });
 });
 
-
-router.post("/get-vehicles", authenticateToken,  (req, res) => {
+router.post("/get-vehicles", authenticateToken, (req, res) => {
   const { email } = req.body;
 
   // Find the user
@@ -99,19 +109,20 @@ router.delete("/deleteVehicle", authenticateToken, (req, res) => {
 
   // If the vehicle is not found in the user's vehicles array
   if (vehicleIndex === -1) {
-    return res.status(404).json({ error: "Vehicle not found in the user's vehicles" });
+    return res
+      .status(404)
+      .json({ error: "Vehicle not found in the user's vehicles" });
   }
 
   // Remove the vehicle from the user's vehicles array
   user.vehicles.splice(vehicleIndex, 1);
-  
+
   // Save the updated user data to file
   saveUsersToFile();
 
-  return res.status(200).json({ message: "Vehicle deleted successfully", user });
+  return res
+    .status(200)
+    .json({ message: "Vehicle deleted successfully", user });
 });
-
-
-
 
 export default router;
