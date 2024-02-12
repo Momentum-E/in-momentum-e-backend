@@ -77,7 +77,7 @@ router.post("/sign-up", async (req, res) => {
 // Confirm Sign Up Route
 // Confirm Sign Up Route
 router.post("/confirm-sign-up", async (req, res) => {
-  const { confirmationCode, username } = req.body;
+  const { confirmationCode, username, name } = req.body;
   const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
 
   const confirmSignUpCommand = new ConfirmSignUpCommand({
@@ -97,10 +97,10 @@ router.post("/confirm-sign-up", async (req, res) => {
 
     // If the user already exists, update their information
     if (existingUserIndex !== -1) {
-      users[existingUserIndex] = { email: username, vehicles: [] };
+      users[existingUserIndex] = { name: name, email: username, vehicles: [] };
     } else {
       // If the user doesn't exist, add them to the database
-      users.push({ email: username, vehicles: [] });
+      users.push({ name: name, email: username, vehicles: [] });
     }
 
     // Save the updated user database to file
@@ -266,9 +266,15 @@ router.post("/get-user", async (req, res) => {
     // console.log("result:", result);
     const email = result.UserAttributes[0].Value;
     const userId = result.Username;
-    // console.log("getuser", res);
+    const existingUserIndex = users.findIndex((user) => user.email === email);
 
-    return res.status(200).json({ email, userId });
+    let name = "";
+    // If the user already exists, het it's name
+    if (existingUserIndex !== -1) {
+      name = users[existingUserIndex].name;
+    }
+
+    return res.status(200).json({ email, userId, name });
   } catch (err) {
     return res
       .status(500)
