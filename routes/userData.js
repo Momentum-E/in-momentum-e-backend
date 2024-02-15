@@ -1,5 +1,11 @@
 import express from "express";
 import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import { config as configDotenv } from "dotenv";
 
@@ -67,18 +73,26 @@ router.post(
   }
 );
 
-router.post("/profile-picture", authenticateToken, (req, res) => {
+// router.post("/profile-picture", authenticateToken, (req, res) => {
+router.post("/profile-picture",authenticateToken, (req, res) => {
   const email = req.body.email;
+  // console.log(req.body);
   const user = findUserByEmail(email);
+  // console.log(user.profilePictureUrl);
   if (!user || !user.profilePictureUrl) {
     return res.status(404).json({ error: "Profile picture not found" });
   }
 
   const imagePath = user.profilePictureUrl;
-  fs.readFile(imagePath, (err, data) => {
+
+  const absoluteImagePath = path.join(__dirname,"..","uploads","..",imagePath);
+
+  fs.readFile(absoluteImagePath, (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error reading image file" });
+      // console.log(err);
+      return res.status(500).json({ error: err.message });
     }
+    console.log(data);
     res.writeHead(200, { "Content-Type": "image/jpeg" });
     res.end(data);
   });
