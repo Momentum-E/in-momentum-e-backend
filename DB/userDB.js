@@ -80,7 +80,6 @@ const users = [
           ]
         }
       }
-    ],
-    "profilePictureUrl": "/uploads/image.png"
+    ]
   }
 ]; export default users;

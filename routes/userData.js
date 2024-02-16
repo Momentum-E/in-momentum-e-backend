@@ -47,11 +47,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post(
-  "/upload/profile-picture",
-  authenticateToken,
-  upload.single("image"),
-  (req, res) => {
+//pload DP
+router.post("/upload/profile-picture", authenticateToken, upload.single("image"), (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
@@ -73,7 +70,7 @@ router.post(
   }
 );
 
-// router.post("/profile-picture", authenticateToken, (req, res) => {
+//fetch DP
 router.post("/profile-picture",authenticateToken, (req, res) => {
   const email = req.body.email;
   // console.log(req.body);
@@ -97,5 +94,46 @@ router.post("/profile-picture",authenticateToken, (req, res) => {
     res.end(data);
   });
 });
+
+//Delete DP
+router.delete("/remove-profile-picture", authenticateToken,  (req, res) => {
+  const email = req.body.email;
+
+  // Check if email is provided in the request body
+  if (!email) {
+    return res.status(400).json({ error: "Email is required in the request body" });
+  }
+
+  // Find the user by email
+  const user = findUserByEmail(email);
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  // Check if the user has a profile picture
+  if (!user.profilePictureUrl) {
+    return res.status(404).json({ error: "Profile picture not found" });
+  }
+
+  const imagePath = path.join(__dirname, "..", "uploads","..", user.profilePictureUrl);
+  console.log(imagePath);
+
+  // Remove the profile picture URL from the user object
+  delete user.profilePictureUrl;
+
+  // Save the updated user data to file
+  saveUsersToFile();
+
+  // Remove the image file from the upload folder
+  fs.unlink(imagePath, (err) => {
+    if (err) {
+      console.error("Error deleting profile picture:", err);
+      return res.status(500).json({ error: "Error deleting profile picture" });
+    }
+    console.log("Profile picture deleted successfully");
+    res.json({ message: "Profile picture deleted successfully" });
+  });
+});
+
 
 export default router;
