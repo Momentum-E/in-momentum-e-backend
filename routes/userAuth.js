@@ -162,12 +162,15 @@ router.post("/initiate-auth", async (req, res) => {
     // Set HttpOnly cookies for tokens
     res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
       httpOnly: true,
+      // sameSite: "none",
     });
     res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
       httpOnly: true,
+      // sameSite: "none",
     });
     res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
       httpOnly: true,
+      // sameSite: "none",
     });
 
     // Respond with a success status
@@ -205,9 +208,11 @@ router.post("/refresh-auth", async (req, res) => {
     // Assuming you want to store the new tokens in cookies for subsequent requests
     res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
       httpOnly: true,
+      // sameSite: "none",
     });
     res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
       httpOnly: true,
+      // sameSite: "none",
     });
     // res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
     //   httpOnly: true,

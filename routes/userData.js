@@ -48,7 +48,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //pload DP
-router.post("/upload/profile-picture", authenticateToken, upload.single("image"), (req, res) => {
+router.post(
+  "/upload/profile-picture",
+  authenticateToken,
+  upload.single("image"),
+  (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
@@ -71,7 +75,7 @@ router.post("/upload/profile-picture", authenticateToken, upload.single("image")
 );
 
 //fetch DP
-router.post("/profile-picture",authenticateToken, (req, res) => {
+router.post("/profile-picture", authenticateToken, (req, res) => {
   const email = req.body.email;
   // console.log(req.body);
   const user = findUserByEmail(email);
@@ -82,7 +86,13 @@ router.post("/profile-picture",authenticateToken, (req, res) => {
 
   const imagePath = user.profilePictureUrl;
 
-  const absoluteImagePath = path.join(__dirname,"..","uploads","..",imagePath);
+  const absoluteImagePath = path.join(
+    __dirname,
+    "..",
+    "uploads",
+    "..",
+    imagePath
+  );
 
   fs.readFile(absoluteImagePath, (err, data) => {
     if (err) {
@@ -96,12 +106,14 @@ router.post("/profile-picture",authenticateToken, (req, res) => {
 });
 
 //Delete DP
-router.delete("/remove-profile-picture", authenticateToken,  (req, res) => {
+router.delete("/remove-profile-picture", authenticateToken, (req, res) => {
   const email = req.body.email;
 
   // Check if email is provided in the request body
   if (!email) {
-    return res.status(400).json({ error: "Email is required in the request body" });
+    return res
+      .status(400)
+      .json({ error: "Email is required in the request body" });
   }
 
   // Find the user by email
@@ -115,7 +127,13 @@ router.delete("/remove-profile-picture", authenticateToken,  (req, res) => {
     return res.status(404).json({ error: "Profile picture not found" });
   }
 
-  const imagePath = path.join(__dirname, "..", "uploads","..", user.profilePictureUrl);
+  const imagePath = path.join(
+    __dirname,
+    "..",
+    "uploads",
+    "..",
+    user.profilePictureUrl
+  );
   console.log(imagePath);
 
   // Remove the profile picture URL from the user object
@@ -135,5 +153,29 @@ router.delete("/remove-profile-picture", authenticateToken,  (req, res) => {
   });
 });
 
+router.put("/update-user-details", authenticateToken, (req, res) => {
+  const { email, newName } = req.body;
+
+  // Check if email and newName are provided in the request body
+  if (!email || !newName) {
+    return res
+      .status(400)
+      .json({ error: "Email and newName are required in the request body" });
+  }
+
+  // Find the user by email
+  const user = findUserByEmail(email);
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  // Update the user's name
+  user.name = newName;
+
+  // Save the updated user data to file
+  saveUsersToFile();
+
+  res.json({ message: "User details updated successfully" });
+});
 
 export default router;
