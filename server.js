@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use("/auth", userAuth);
 app.use("/user", addVehicle);
-app.use("/user-data/", userData);
+app.use("/user-data", userData);
 
 app.get("/check", (req, res) => {
   return res.status(200).json({ message: "API working" });

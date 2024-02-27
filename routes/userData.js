@@ -155,7 +155,7 @@ router.delete("/remove-profile-picture", authenticateToken, (req, res) => {
 
 router.put("/update-user-details", authenticateToken, (req, res) => {
   const { email, newName } = req.body;
-
+  console.log(email, newName);
   // Check if email and newName are provided in the request body
   if (!email || !newName) {
     return res
