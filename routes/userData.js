@@ -48,11 +48,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //pload DP
-router.post(
-  "/upload/profile-picture",
-  authenticateToken,
-  upload.single("image"),
-  (req, res) => {
+router.post("/upload/profile-picture", authenticateToken, upload.single("image"), (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
