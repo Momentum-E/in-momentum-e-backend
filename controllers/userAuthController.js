@@ -12,6 +12,7 @@ import {
   ConfirmForgotPasswordCommand,
   ChangePasswordCommand,
   DeleteUserCommand,
+  RespondToAuthChallengeCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 
 import { calculateSecretHash } from "../utils/secretHashCalculate.js";
@@ -131,6 +132,34 @@ export const resendConfirmationCode = async (req, res) => {
   }
 };
 
+export const respondToNewPasswordChallenge = async (
+  username,
+  newPassword,
+  session
+) => {
+  const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
+  const respondToAuthChallengeCommand = new RespondToAuthChallengeCommand({
+    ChallengeName: "NEW_PASSWORD_REQUIRED",
+    ClientId: CLIENT_ID,
+    ChallengeResponses: {
+      NEW_PASSWORD: newPassword,
+      USERNAME: username,
+      SECRET_HASH: secret,
+    },
+    Session: session,
+  });
+
+  try {
+    const response = await cognitoClient.send(respondToAuthChallengeCommand);
+    // Handle the response, such as extracting tokens if successful
+    return response;
+  } catch (error) {
+    // Handle any errors
+    console.error("Error responding to new password challenge:", error);
+    throw error;
+  }
+};
+
 export const initiateAuth = async (req, res) => {
   const { username, password } = req.body;
   const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
@@ -147,24 +176,48 @@ export const initiateAuth = async (req, res) => {
 
   try {
     const authResult = await cognitoClient.send(initiateAuthCommand);
-    // console.log("auth result", authResult);
-    // console.log("------------")
-    // Set HttpOnly cookies for tokens
-    res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
-      httpOnly: true,
-      // sameSite: "none",
-    });
-    res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
-      httpOnly: true,
-      // sameSite: "none",
-    });
-    res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
-      httpOnly: true,
-      // sameSite: "none",
-    });
+    console.log("auth result", authResult);
+    if (authResult.ChallengeName == "NEW_PASSWORD_REQUIRED") {
+      const result = await respondToNewPasswordChallenge(
+        username,
+        "Demo@1234",
+        authResult.Session
+      );
+      console.log("pass challenge result", result);
+      res.cookie("accessToken", result.AuthenticationResult.AccessToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
+      res.cookie("idToken", authresultResult.AuthenticationResult.IdToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
+      res.cookie("refreshToken", result.AuthenticationResult.RefreshToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
 
-    // Respond with a success status
-    res.status(200).json({ success: true });
+      // Respond with a success status
+      res.status(200).json({ success: true });
+    } else {
+      console.log("------------");
+      // Set HttpOnly cookies for tokens
+      res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
+      res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
+      res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
+        httpOnly: true,
+        // sameSite: "none",
+      });
+
+      // Respond with a success status
+      res.status(200).json({ success: true });
+    }
   } catch (err) {
     return res
       .status(500)
