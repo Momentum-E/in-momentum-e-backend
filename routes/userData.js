@@ -95,7 +95,7 @@ router.post("/profile-picture", authenticateToken, (req, res) => {
       // console.log(err);
       return res.status(500).json({ error: err.message });
     }
-    console.log(data);
+    // console.log(data);
     res.writeHead(200, { "Content-Type": "image/jpeg" });
     res.end(data);
   });
@@ -130,7 +130,7 @@ router.delete("/remove-profile-picture", authenticateToken, (req, res) => {
     "..",
     user.profilePictureUrl
   );
-  console.log(imagePath);
+  // console.log(imagePath);
 
   // Remove the profile picture URL from the user object
   delete user.profilePictureUrl;
@@ -144,14 +144,14 @@ router.delete("/remove-profile-picture", authenticateToken, (req, res) => {
       console.error("Error deleting profile picture:", err);
       return res.status(500).json({ error: "Error deleting profile picture" });
     }
-    console.log("Profile picture deleted successfully");
+    // console.log("Profile picture deleted successfully");
     res.json({ message: "Profile picture deleted successfully" });
   });
 });
 
 router.put("/update-user-details", authenticateToken, (req, res) => {
   const { email, newName } = req.body;
-  console.log(email, newName);
+  // console.log(email, newName);
   // Check if email and newName are provided in the request body
   if (!email || !newName) {
     return res

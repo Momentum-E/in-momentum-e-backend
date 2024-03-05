@@ -65,7 +65,7 @@ export const addVehicle = (req, res) => {
   const formattedDate = `${day < 10 ? "0" : ""}${day}-${
     month < 10 ? "0" : ""
   }${month}-${year}`;
-  console.log(formattedDate);
+  // console.log(formattedDate);
   vehicle.Vehicle_Info.Connected_On = formattedDate.toString();
   // Add the vehicle to the user's vehicles array
   user.vehicles.push(vehicle);

@@ -48,7 +48,7 @@ const cognitoClient = new CognitoIdentityProviderClient({
 export const signup = async (req, res) => {
   const { username, password } = req.body;
 
-  console.log("sign-up called");
+  // console.log("sign-up called");
   const secretHash = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
 
   const signUpCommand = new SignUpCommand({
@@ -163,7 +163,7 @@ export const respondToNewPasswordChallenge = async (
 export const initiateAuth = async (req, res) => {
   const { username, password } = req.body;
   const secret = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
-  console.log(secret);
+  // console.log(secret);
   const initiateAuthCommand = new InitiateAuthCommand({
     AuthFlow: "USER_PASSWORD_AUTH", // Specify the authentication flow
     ClientId: CLIENT_ID,
@@ -176,14 +176,14 @@ export const initiateAuth = async (req, res) => {
 
   try {
     const authResult = await cognitoClient.send(initiateAuthCommand);
-    console.log("auth result", authResult);
+    // console.log("auth result", authResult);
     if (authResult.ChallengeName == "NEW_PASSWORD_REQUIRED") {
       const result = await respondToNewPasswordChallenge(
         username,
         "Demo@1234",
         authResult.Session
       );
-      console.log("pass challenge result", result);
+      // console.log("pass challenge result", result);
       res.cookie("accessToken", result.AuthenticationResult.AccessToken, {
         httpOnly: true,
         // sameSite: "none",
@@ -200,7 +200,7 @@ export const initiateAuth = async (req, res) => {
       // Respond with a success status
       res.status(200).json({ success: true });
     } else {
-      console.log("------------");
+      // console.log("------------");
       // Set HttpOnly cookies for tokens
       res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
         httpOnly: true,
@@ -227,15 +227,15 @@ export const initiateAuth = async (req, res) => {
 
 export const refreshAuth = async (req, res) => {
   const { userId } = req.body;
-  console.log("ref", userId);
+  // console.log("ref", userId);
 
   // Extract refreshToken from cookies
   const refreshToken = req.cookies.refreshToken;
-  console.log(refreshToken);
+  // console.log(refreshToken);
 
   // Calculate secret hash
   const secretHash = calculateSecretHash(userId, CLIENT_ID, CLIENT_SECRET);
-  console.log(secretHash);
+  // console.log(secretHash);
   const initiateAuthCommand = new InitiateAuthCommand({
     AuthFlow: "REFRESH_TOKEN_AUTH",
     ClientId: CLIENT_ID,
@@ -340,7 +340,7 @@ export const forgotPassword = async (req, res) => {
 
   try {
     const response = await cognitoClient.send(forgotPasswordCommand);
-    console.log(response);
+    // console.log(response);
     return res
       .status(200)
       .json({ message: "Forgot password request initiated successfully" });
@@ -379,11 +379,11 @@ export const confirmForgotPassword = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   const { previousPassword, proposedPassword, username } = req.body;
-  console.log(previousPassword, proposedPassword, username);
+  // console.log(previousPassword, proposedPassword, username);
 
   // Get the access token from cookies
   const accessToken = req.cookies.accessToken;
-  console.log(!!accessToken);
+  // console.log(!!accessToken);
 
   try {
     // Calculate secret hash
