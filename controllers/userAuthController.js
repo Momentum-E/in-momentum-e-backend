@@ -186,15 +186,15 @@ export const initiateAuth = async (req, res) => {
       // console.log("pass challenge result", result);
       res.cookie("accessToken", result.AuthenticationResult.AccessToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
       res.cookie("idToken", authresultResult.AuthenticationResult.IdToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
       res.cookie("refreshToken", result.AuthenticationResult.RefreshToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
 
       // Respond with a success status
@@ -204,15 +204,15 @@ export const initiateAuth = async (req, res) => {
       // Set HttpOnly cookies for tokens
       res.cookie("accessToken", authResult.AuthenticationResult.AccessToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
       res.cookie("idToken", authResult.AuthenticationResult.IdToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
       res.cookie("refreshToken", authResult.AuthenticationResult.RefreshToken, {
         httpOnly: true,
-        // sameSite: "none",
+        sameSite: "none",
       });
 
       // Respond with a success status

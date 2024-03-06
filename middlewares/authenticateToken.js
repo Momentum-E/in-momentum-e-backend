@@ -11,7 +11,7 @@ const verifier = CognitoJwtVerifier.create({
 export default async function authenticateToken(req, res, next) {
   try {
     const idToken = req.cookies.idToken;
-    // console.log(idToken);
+    console.log(idToken);
 
     if (!idToken) {
       return res
