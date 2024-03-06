@@ -377,7 +377,7 @@ const users = [
               99.46
             ]
           },
-          "Connected_On": "04-03-2024",
+          "Connected_On": "06-03-2024",
           "Data_Points_Collected": "0",
           "Average_Miles_Driven": [
             82,
