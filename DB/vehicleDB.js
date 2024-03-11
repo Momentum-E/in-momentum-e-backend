@@ -31,7 +31,7 @@ const vehicles = [
         Average_Charging_Rate: "0.45 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "55 km",
+        Avg_Daily_Km_Driven: "74 km",
         Temperature_High_Low: "30°C / 18°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "75 / 55",
@@ -45,8 +45,8 @@ const vehicles = [
         Monthly_SOH_Data: [98.88, 98.85, 98.84, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-10",
-      Data_Points_Collected: "220",
-      Average_Miles_Driven: [50, 65, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "35",
+      Average_Miles_Driven: [78, 65, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -81,7 +81,7 @@ const vehicles = [
         Average_Charging_Rate: "0.45 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "50 km",
+        Avg_Daily_Km_Driven: "65 km",
         Temperature_High_Low: "32°C / 19°C",
         SOC_Range: "25% - 80%",
         Range_Observed_Max_Min: "70 / 50",
@@ -95,8 +95,8 @@ const vehicles = [
         Monthly_SOH_Data: [97.88, 97.85, 97.82, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-09",
-      Data_Points_Collected: "200",
-      Average_Miles_Driven: [40, 25, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "18",
+      Average_Miles_Driven: [60, 68, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -131,7 +131,7 @@ const vehicles = [
         Average_Charging_Rate: "0.45 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "60 km",
+        Avg_Daily_Km_Driven: "83 km",
         Temperature_High_Low: "35°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "80 / 55",
@@ -145,8 +145,8 @@ const vehicles = [
         Monthly_SOH_Data: [99.88, 98.85, 99.85, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-08",
-      Data_Points_Collected: "250",
-      Average_Miles_Driven: [50, 35, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "24",
+      Average_Miles_Driven: [80, 89, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -181,7 +181,7 @@ const vehicles = [
         Average_Charging_Rate: "0.45 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "65 km",
+        Avg_Daily_Km_Driven: "77 km",
         Temperature_High_Low: "36°C / 20°C",
         SOC_Range: "15% - 80%",
         Range_Observed_Max_Min: "85 / 50",
@@ -195,8 +195,8 @@ const vehicles = [
         Monthly_SOH_Data: [97.88, 97.85, 97.81, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-07",
-      Data_Points_Collected: "230",
-      Average_Miles_Driven: [55, 40, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "17",
+      Average_Miles_Driven: [79, 74, 77, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -231,7 +231,7 @@ const vehicles = [
         Average_Charging_Rate: "0.65 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "50 km",
+        Avg_Daily_Km_Driven: "81 km",
         Temperature_High_Low: "30°C / 18°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "70 / 50",
@@ -245,8 +245,8 @@ const vehicles = [
         Monthly_SOH_Data: [99.15, 99.04, 99.00, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-15",
-      Data_Points_Collected: "200",
-      Average_Miles_Driven: [40, 25, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "30",
+      Average_Miles_Driven: [88, 93, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -281,7 +281,7 @@ const vehicles = [
         Average_Charging_Rate: "0.65 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "55 km",
+        Avg_Daily_Km_Driven: "95 km",
         Temperature_High_Low: "35°C / 22°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "75 / 55",
@@ -295,8 +295,8 @@ const vehicles = [
         Monthly_SOH_Data: [98.88, 98.85, 98.82, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-22",
-      Data_Points_Collected: "220",
-      Average_Miles_Driven: [45, 30, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "14",
+      Average_Miles_Driven: [98, 90, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
   {
@@ -331,7 +331,7 @@ const vehicles = [
         Average_Charging_Rate: "0.65 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "60 km",
+        Avg_Daily_Km_Driven: "84 km",
         Temperature_High_Low: "32°C / 19°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "80 / 55",
@@ -345,8 +345,8 @@ const vehicles = [
         Monthly_SOH_Data: [96.82, 96.75, 96.71, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       Connected_On: "2024-03-13",
-      Data_Points_Collected: "250",
-      Average_Miles_Driven: [50, 35, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Data_Points_Collected: "27",
+      Average_Miles_Driven: [77, 63, 84, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   },
 ];
