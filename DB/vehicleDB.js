@@ -24,11 +24,11 @@ const vehicles = [
       VIN: "ATH45X12345678901",
       Battery_Capacity: "3.7 kWh",
       Charging_Pattern: {
-        Total_Energy_Consumed: "10 kW",
+        Total_Energy_Consumed: "15 kW",
         Average_SOC: "82%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 6,
-        Average_Charging_Rate: "0.950 kW",
+        Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "74 km",
@@ -78,7 +78,7 @@ const vehicles = [
         Average_SOC: "85%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 5,
-        Average_Charging_Rate: "0.950 kW",
+        Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "65 km",
@@ -128,7 +128,7 @@ const vehicles = [
         Average_SOC: "78%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 4,
-        Average_Charging_Rate: "0.950 kW",
+        Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "83 km",
@@ -178,7 +178,7 @@ const vehicles = [
         Average_SOC: "73%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 3,
-        Average_Charging_Rate: "0.950 kW",
+        Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "77 km",
@@ -222,13 +222,13 @@ const vehicles = [
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE12345678901",
-      Battery_Capacity: "5.1 kWh",
+      Battery_Capacity: "4.56 kWh",
       Charging_Pattern: {
-        Total_Energy_Consumed: "11 kW",
+        Total_Energy_Consumed: "16 kW",
         Average_SOC: "80%",
         Connector_Type: "Type 1",
         Total_Charging_Sessions: 5,
-        Average_Charging_Rate: "0.65 kW",
+        Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "81 km",
@@ -272,13 +272,13 @@ const vehicles = [
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE98765432109",
-      Battery_Capacity: "5.1 kWh",
+      Battery_Capacity: "4.56 kWh",
       Charging_Pattern: {
-        Total_Energy_Consumed: "10.5 kW",
+        Total_Energy_Consumed: "20.5 kW",
         Average_SOC: "82%",
         Connector_Type: "Type 1",
         Total_Charging_Sessions: 6,
-        Average_Charging_Rate: "0.65 kW",
+        Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "95 km",
@@ -322,13 +322,13 @@ const vehicles = [
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE45678912304",
-      Battery_Capacity: "5.1 kWh",
+      Battery_Capacity: "4.56 kWh",
       Charging_Pattern: {
         Total_Energy_Consumed: "12.5 kW",
         Average_SOC: "78%",
         Connector_Type: "Type 1",
         Total_Charging_Sessions: 4,
-        Average_Charging_Rate: "0.65 kW",
+        Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "84 km",
