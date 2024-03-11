@@ -315,5 +315,11 @@ const users = [
       }
     ],
     "profilePictureUrl": "/uploads/echargeup logo.webp"
-  }
+  },
+  {
+    "name": "Momentum-E",
+    "email": "dashboard@momentum-e.com",
+    "vehicles": [],
+    "profilePictureUrl": "/uploads/momentum-e.webp"
+  },
 ]; export default users;
