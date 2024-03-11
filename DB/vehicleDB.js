@@ -46,7 +46,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-10",
       Data_Points_Collected: "35",
-      Average_Miles_Driven: [78, 65, 74, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [78, 65, 74, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -96,7 +96,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-09",
       Data_Points_Collected: "18",
-      Average_Miles_Driven: [60, 68, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [60, 68, 65, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -146,7 +146,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-08",
       Data_Points_Collected: "24",
-      Average_Miles_Driven: [80, 89, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [80, 89, 83, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -196,7 +196,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-07",
       Data_Points_Collected: "17",
-      Average_Miles_Driven: [79, 74, 77, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [79, 74, 77, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -246,7 +246,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-15",
       Data_Points_Collected: "30",
-      Average_Miles_Driven: [88, 93, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [88, 93, 81, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -296,7 +296,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-22",
       Data_Points_Collected: "14",
-      Average_Miles_Driven: [98, 90, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [98, 90, 95, null, null, null, null, null, null, null, null, null],
     },
   },
   {
@@ -346,7 +346,7 @@ const vehicles = [
       },
       Connected_On: "2024-03-13",
       Data_Points_Collected: "27",
-      Average_Miles_Driven: [77, 63, 84, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      Average_Miles_Driven: [77, 63, 84, null, null, null, null, null, null, null, null, null],
     },
   },
 ];
