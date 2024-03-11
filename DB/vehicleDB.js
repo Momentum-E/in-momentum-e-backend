@@ -28,7 +28,7 @@ const vehicles = [
         Average_SOC: "82%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 6,
-        Average_Charging_Rate: "0.45 kW",
+        Average_Charging_Rate: "0.950 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "74 km",
@@ -78,7 +78,7 @@ const vehicles = [
         Average_SOC: "85%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 5,
-        Average_Charging_Rate: "0.45 kW",
+        Average_Charging_Rate: "0.950 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "65 km",
@@ -128,7 +128,7 @@ const vehicles = [
         Average_SOC: "78%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 4,
-        Average_Charging_Rate: "0.45 kW",
+        Average_Charging_Rate: "0.950 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "83 km",
@@ -178,7 +178,7 @@ const vehicles = [
         Average_SOC: "73%",
         Connector_Type: "Type 2",
         Total_Charging_Sessions: 3,
-        Average_Charging_Rate: "0.45 kW",
+        Average_Charging_Rate: "0.950 kW",
       },
       Usage: {
         Avg_Daily_Km_Driven: "77 km",
@@ -236,7 +236,7 @@ const vehicles = [
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "110 / 85",
         Real_Range_Observed: "98 km",
-        Observed_vs_EPA_WLTP_provided: "98 Km 140 Km",
+        Observed_vs_EPA_WLTP_provided: "98 Km 145 Km",
       },
       Battery_Health: {
         SoH: "99.00 %",
@@ -286,7 +286,7 @@ const vehicles = [
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "110 / 94",
         Real_Range_Observed: "105 km",
-        Observed_vs_EPA_WLTP_provided: "105 Km 140 Km",
+        Observed_vs_EPA_WLTP_provided: "105 Km 145 Km",
       },
       Battery_Health: {
         SoH: "98.82 %",
@@ -336,7 +336,7 @@ const vehicles = [
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "114 / 98",
         Real_Range_Observed: "108 km",
-        Observed_vs_EPA_WLTP_provided: "108 Km 140 Km",
+        Observed_vs_EPA_WLTP_provided: "108 Km 145 Km",
       },
       Battery_Health: {
         SoH: "96.71 %",
