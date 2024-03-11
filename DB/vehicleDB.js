@@ -32,7 +32,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "74 km",
-        Temperature_High_Low: "30°C / 18°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "110 / 80",
         Real_Range_Observed: "90 km",
@@ -65,7 +65,7 @@ const vehicles = [
       SERIAL_NUMBER: "987654321",
       ID: "IOT002",
     },
-    LOCATION: "Mumbai, India",
+    LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Charging",
     Vehicle_Info: {
       Odometer: "15500 Km",
@@ -82,7 +82,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "65 km",
-        Temperature_High_Low: "32°C / 19°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "25% - 80%",
         Range_Observed_Max_Min: "120 / 97",
         Real_Range_Observed: "112 km",
@@ -115,7 +115,7 @@ const vehicles = [
       SERIAL_NUMBER: "456789123",
       ID: "IOT003",
     },
-    LOCATION: "Chennai, India",
+    LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
       Odometer: "17000 Km",
@@ -132,7 +132,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "83 km",
-        Temperature_High_Low: "35°C / 22°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "105 / 89",
         Real_Range_Observed: "108 km",
@@ -165,7 +165,7 @@ const vehicles = [
       SERIAL_NUMBER: "369852147",
       ID: "IOT004",
     },
-    LOCATION: "Hyderabad, India",
+    LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Charging",
     Vehicle_Info: {
       Odometer: "18000 Km",
@@ -182,7 +182,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "77 km",
-        Temperature_High_Low: "36°C / 20°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "15% - 80%",
         Range_Observed_Max_Min: "105 / 82",
         Real_Range_Observed: "98 km",
@@ -232,7 +232,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "81 km",
-        Temperature_High_Low: "30°C / 18°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "110 / 85",
         Real_Range_Observed: "98 km",
@@ -265,7 +265,7 @@ const vehicles = [
       SERIAL_NUMBER: "987654321",
       ID: "IOT007",
     },
-    LOCATION: "Chennai, India",
+    LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
       Odometer: "11000 Km",
@@ -282,7 +282,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "95 km",
-        Temperature_High_Low: "35°C / 22°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "110 / 94",
         Real_Range_Observed: "105 km",
@@ -315,7 +315,7 @@ const vehicles = [
       SERIAL_NUMBER: "456789123",
       ID: "IOT008",
     },
-    LOCATION: "Mumbai, India",
+    LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
       Odometer: "12000 Km",
@@ -332,7 +332,7 @@ const vehicles = [
       },
       Usage: {
         Avg_Daily_Km_Driven: "84 km",
-        Temperature_High_Low: "32°C / 19°C",
+        Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "114 / 98",
         Real_Range_Observed: "108 km",
