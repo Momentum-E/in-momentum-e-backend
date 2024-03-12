@@ -18,7 +18,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
-      Odometer: "16000 Km",
+      Odometer: "16000 km",
       Vehicle_Model: "Ather 450X",
       Model_Year: "2021",
       VIN: "ATH45X12345678901",
@@ -31,12 +31,12 @@ const vehicles = [
         Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "74 km",
+        Avg_Daily_km_Driven: "74 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "110 / 80",
         Real_Range_Observed: "90 km",
-        Observed_vs_EPA_WLTP_provided: "85 Km / 150 Km",
+        Observed_vs_EPA_WLTP_provided: "85 km / 150 km",
       },
       Battery_Health: {
         SoH: "98.84 %",
@@ -68,7 +68,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Charging",
     Vehicle_Info: {
-      Odometer: "15500 Km",
+      Odometer: "15500 km",
       Vehicle_Model: "Ather 450X",
       Model_Year: "2021",
       VIN: "ATH45X98765432109",
@@ -81,12 +81,12 @@ const vehicles = [
         Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "65 km",
+        Avg_Daily_km_Driven: "65 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "25% - 80%",
         Range_Observed_Max_Min: "120 / 97",
         Real_Range_Observed: "112 km",
-        Observed_vs_EPA_WLTP_provided: "112 Km / 150 Km",
+        Observed_vs_EPA_WLTP_provided: "112 km / 150 km",
       },
       Battery_Health: {
         SoH: "97.82 %",
@@ -118,7 +118,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
-      Odometer: "17000 Km",
+      Odometer: "17000 km",
       Vehicle_Model: "Ather 450X",
       Model_Year: "2021",
       VIN: "ATH45X45678912304",
@@ -131,12 +131,12 @@ const vehicles = [
         Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "83 km",
+        Avg_Daily_km_Driven: "83 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "105 / 89",
         Real_Range_Observed: "108 km",
-        Observed_vs_EPA_WLTP_provided: "108 Km / 150 Km",
+        Observed_vs_EPA_WLTP_provided: "108 km / 150 km",
       },
       Battery_Health: {
         SoH: "99.85 %",
@@ -168,7 +168,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Charging",
     Vehicle_Info: {
-      Odometer: "18000 Km",
+      Odometer: "18000 km",
       Vehicle_Model: "Ather 450X",
       Model_Year: "2021",
       VIN: "ATH45X36985214705",
@@ -181,12 +181,12 @@ const vehicles = [
         Average_Charging_Rate: "0.70 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "77 km",
+        Avg_Daily_km_Driven: "77 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "15% - 80%",
         Range_Observed_Max_Min: "105 / 82",
         Real_Range_Observed: "98 km",
-        Observed_vs_EPA_WLTP_provided: "98 Km / 150Km",
+        Observed_vs_EPA_WLTP_provided: "98 km / 150km",
       },
       Battery_Health: {
         SoH: "97.81 %",
@@ -218,7 +218,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Charging",
     Vehicle_Info: {
-      Odometer: "10000 Km",
+      Odometer: "10000 km",
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE12345678901",
@@ -231,12 +231,12 @@ const vehicles = [
         Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "81 km",
+        Avg_Daily_km_Driven: "81 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "110 / 85",
         Real_Range_Observed: "98 km",
-        Observed_vs_EPA_WLTP_provided: "98 Km / 145 Km",
+        Observed_vs_EPA_WLTP_provided: "98 km / 145 km",
       },
       Battery_Health: {
         SoH: "99.00 %",
@@ -268,7 +268,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
-      Odometer: "11000 Km",
+      Odometer: "11000 km",
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE98765432109",
@@ -281,12 +281,12 @@ const vehicles = [
         Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "95 km",
+        Avg_Daily_km_Driven: "95 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "30% - 90%",
         Range_Observed_Max_Min: "110 / 94",
         Real_Range_Observed: "105 km",
-        Observed_vs_EPA_WLTP_provided: "105 Km / 145 Km",
+        Observed_vs_EPA_WLTP_provided: "105 km / 145 km",
       },
       Battery_Health: {
         SoH: "98.82 %",
@@ -318,7 +318,7 @@ const vehicles = [
     LOCATION: "Bangalore, India",
     CHARGING_STATUS: "Not charging",
     Vehicle_Info: {
-      Odometer: "12000 Km",
+      Odometer: "12000 km",
       Vehicle_Model: "TVS iCube",
       Model_Year: "2023",
       VIN: "ICUBE45678912304",
@@ -331,12 +331,12 @@ const vehicles = [
         Average_Charging_Rate: "0.95 kW",
       },
       Usage: {
-        Avg_Daily_Km_Driven: "84 km",
+        Avg_Daily_km_Driven: "84 km",
         Temperature_High_Low: "33°C / 22°C",
         SOC_Range: "20% - 85%",
         Range_Observed_Max_Min: "114 / 98",
         Real_Range_Observed: "108 km",
-        Observed_vs_EPA_WLTP_provided: "108 Km / 145 Km",
+        Observed_vs_EPA_WLTP_provided: "108 km / 145 km",
       },
       Battery_Health: {
         SoH: "96.71 %",
