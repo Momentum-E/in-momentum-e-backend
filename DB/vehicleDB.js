@@ -146,7 +146,7 @@ const vehicles = [
         SoH: "99.85 %",
         Estimated_Degradation: "0.15 %",
         Battery_Chemistry: "Li-ion",
-        Monthly_SOH_Data: [99.88, 98.85, 99.85, null, null, null, null, null, null, null, null, null],
+        Monthly_SOH_Data: [99.88, 98.85, 98.85, null, null, null, null, null, null, null, null, null],
       },
       RUL: "640 cycles", 
       EOL: "21-10-2028",
