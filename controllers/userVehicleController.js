@@ -122,3 +122,8 @@ export const deleteVehicle = (req, res) => {
     .status(200)
     .json({ message: "Vehicle deleted successfully", user });
 };
+
+export const uploadData = (req, res) => {
+  console.log(req.body, req.file);
+  res.json({ message: "upload hit" });
+};

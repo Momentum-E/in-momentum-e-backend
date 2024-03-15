@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import userAuth from "./routes/userAuth.js";
-import addVehicle from "./routes/userVehicle.js";
+import userVehicle from "./routes/userVehicle.js";
 import userData from "./routes/userData.js";
 
 // Load environment variables from .env file
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "uploads")));
 const PORT = process.env.PORT || 8080;
 
 app.use("/auth", userAuth);
-app.use("/user", addVehicle);
+app.use("/user", userVehicle);
 app.use("/user-data", userData);
 
 app.get("/check", (req, res) => {
