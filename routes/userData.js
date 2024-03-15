@@ -174,4 +174,58 @@ router.put("/update-user-details", authenticateToken, (req, res) => {
   res.json({ message: "User details updated successfully" });
 });
 
+// require("dotenv").config();
+// const axios = require("axios");
+// const {
+//   S3Client,
+//   GetObjectCommand,
+//   PutObjectCommand,
+//   DeleteObjectCommand,
+// } = require("@aws-sdk/client-s3");
+
+// const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+
+// const BUCKET_NAME = process.env.IMAGES_BUCKET;
+// const s3Client = new S3Client({
+//   region: process.env.REGION,
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
+// });
+
+// const getSignedImageURL = async (req, res) => {
+//   const imageName = req.params.imageName;
+//   const S3key = `userImage/${imageName}`;
+
+//   try {
+//     const command = new GetObjectCommand({
+//       Bucket: BUCKET_NAME,
+//       Key: S3key,
+//     });
+//     const url = await getSignedUrl(s3Client, command, { expiresIn: 36000 });
+//     console.log("getImageUrl", url);
+//     res.status(200).send(url);
+//   } catch (error) {
+//     res.status(500).send("error in: " + error);
+//   }
+// };
+
+// const getImageSignedUplaodURL = async (req, res) => {
+//   const imageName = req.body.imageName;
+//   const type = req.body.type;
+//   const S3key = `userImage/${imageName}`;
+
+//   try {
+//     const command = new PutObjectCommand({
+//       Bucket: BUCKET_NAME,
+//       Key: S3key,
+//       ContentType: type,
+//     });
+//     const url = await getSignedUrl(s3Client, command);
+//     console.log("postImageUrl", url);
+//     res.status(200).send(url);
+//   } catch (error) {
+//     console.error("error in " + error);
+//   }
+// };
+
 export default router;
