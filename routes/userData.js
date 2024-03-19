@@ -14,6 +14,7 @@ import vehicles from "../DB/vehicleDB.js";
 
 import fs from "fs";
 import authenticateToken from "../middlewares/authenticateToken.js";
+import { deleteUserFile, getSignedURL, getSignedUplaodURL } from "../controllers/userDataController.js";
 
 function saveUsersToFile() {
   fs.writeFile(
@@ -46,25 +47,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-// require("dotenv").config();
-// const axios = require("axios");
-import {
-  S3Client,
-  GetObjectCommand,
-  PutObjectCommand,
-  DeleteObjectCommand,
-} from "@aws-sdk/client-s3";
-
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-
-const BUCKET_NAME = process.env.IMAGES_BUCKET;
-
-const s3Client = new S3Client({
-  region: process.env.REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
-});
 
 //pload DP
 router.post("/upload/profile-picture", authenticateToken, upload.single("image"), (req, res) => {
@@ -193,60 +175,10 @@ router.put("/update-user-details", authenticateToken, (req, res) => {
   res.json({ message: "User details updated successfully" });
 });
 
-const getSignedURL = async (req, res) => {
-  const imageName = req.params.imageName;
-  const S3key = `userVehicleData/${imageName}`;
+router.get("/presignedURL", authenticateToken, getSignedURL);
 
-  try {
-    const command = new GetObjectCommand({
-      Bucket: BUCKET_NAME,
-      Key: S3key,
-    });
-    const url = await getSignedUrl(s3Client, command, { expiresIn: 36000 });
-    console.log("getUrl", url);
-    res.status(200).send(url);
-  } catch (error) {
-    res.status(500).send("error in: " + error);
-  }
-};
+router.post("/presignedUploadUrl",authenticateToken, getSignedUplaodURL);
 
-const getSignedUplaodURL = async (req, res) => {
-  const imageName = req.body.imageName;
-  const type = req.body.type;
-  const S3key = `userVehicleData/${imageName}`;
-
-  try {
-    const command = new PutObjectCommand({
-      Bucket: BUCKET_NAME,
-      Key: S3key,
-      ContentType: type,
-    });
-    const url = await getSignedUrl(s3Client, command);
-    console.log("postImageUrl", url);
-    res.status(200).send(url);
-  } catch (error) {
-    console.error("error in " + error);
-  }
-};
-
-const deleteUserImage = async (req, res) => {
-  const imageName = req.params.imageName;
-  const S3key = `userVehicleData/${imageName}`;
-
-  try {
-    await s3Client.send(
-      new DeleteObjectCommand({
-        Bucket: BUCKET_NAME,
-        Key: S3key,
-      })
-    );
-
-    console.log(`Deleted image: ${imageName}`);
-    res.status(204).send(); // Respond with a 204 (No Content) status on successful deletion
-  } catch (error) {
-    console.error("Error deleting image: " + error);
-    res.status(500).send("Error deleting image: " + error);
-  }
-};
+router.delete("/dataFile", authenticateToken, deleteUserFile);
 
 export default router;
