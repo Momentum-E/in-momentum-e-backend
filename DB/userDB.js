@@ -63,7 +63,7 @@ const users = [
           },
           "RUL": "1050 cycles",
           "EOL": "09-09-2029",
-          "Connected_On": "18-03-2024",
+          "Connected_On": "25-03-2024",
           "Data_Points_Collected": "30",
           "Average_Miles_Driven": [
             88,
