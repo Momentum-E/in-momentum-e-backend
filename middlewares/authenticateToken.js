@@ -1,4 +1,4 @@
-import { CognitoJwtVerifier }  from "aws-jwt-verify";
+import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { config as configDotenv } from "dotenv";
 configDotenv();
 
@@ -11,7 +11,6 @@ const verifier = CognitoJwtVerifier.create({
 export default async function authenticateToken(req, res, next) {
   try {
     const idToken = req.cookies.idToken;
-    // console.log(idToken);
 
     if (!idToken) {
       return res
@@ -21,7 +20,7 @@ export default async function authenticateToken(req, res, next) {
 
     const payload = await verifier.verify(idToken);
     // console.log(payload);
-    // // If you need to access user data in route handlers, attach it to the request
+    // If you need to access user data in route handlers, attach it to the request
     req.body.authUserId = payload.sub; //sub is userId
 
     next(); // Continue to the next middleware or route handler

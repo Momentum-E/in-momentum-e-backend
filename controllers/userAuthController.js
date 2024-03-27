@@ -17,23 +17,7 @@ import {
 
 import { calculateSecretHash } from "../utils/secretHashCalculate.js";
 
-import users from "../DB/userDB.js";
-
-import fs from "fs";
-
-function saveUsersToFile() {
-  fs.writeFile(
-    "./DB/userDB.js",
-    `const users = ${JSON.stringify(users, null, 2)}; export default users;`,
-    (err) => {
-      if (err) {
-        console.error("Error writing users to file:", err);
-      } else {
-        console.log("Users saved to file successfully");
-      }
-    }
-  );
-}
+import User from "../models/user.js";
 
 configDotenv();
 
@@ -85,20 +69,23 @@ export const confirmSignup = async (req, res) => {
     await cognitoClient.send(confirmSignUpCommand);
 
     // Check if the user already exists in the database
-    const existingUserIndex = users.findIndex(
-      (user) => user.email === username
-    );
+    const existingUser = await User.findOne({ email: username });
 
     // If the user already exists, update their information
-    if (existingUserIndex !== -1) {
-      users[existingUserIndex] = { name: name, email: username, vehicles: [] };
+    if (existingUser) {
+      await User.findOneAndUpdate(
+        { email: username },
+        { name: name, vehicles: [] } // Assuming you only update name and reset vehicles
+      );
     } else {
-      // If the user doesn't exist, add them to the database
-      users.push({ name: name, email: username, vehicles: [] });
+      // If the user doesn't exist, create a new user in the database
+      await User.create({
+        name: name,
+        email: username,
+        vehicles: [],
+        profilePictureUrl: "",
+      });
     }
-
-    // Save the updated user database to file
-    saveUsersToFile();
 
     return res.status(200).json({ message: "Confirmation successful" });
   } catch (err) {
@@ -183,6 +170,26 @@ export const initiateAuth = async (req, res) => {
         "Demo@1234",
         authResult.Session
       );
+
+      // Check if the user already exists in the database
+      const existingUser = await User.findOne({ email: username });
+
+      // If the user already exists, update their information
+      if (existingUser) {
+        await User.findOneAndUpdate(
+          { email: username },
+          { name: "Update Name", vehicles: [] } // Assuming you only update name and reset vehicles
+        );
+      } else {
+        // If the user doesn't exist, create a new user in the database
+        await User.create({
+          name: "Update Name",
+          email: username,
+          vehicles: [],
+          profilePictureUrl: "",
+        });
+      }
+
       // console.log("pass challenge result", result);
       res.cookie("accessToken", result.AuthenticationResult.AccessToken, {
         httpOnly: true,
@@ -315,15 +322,15 @@ export const getUser = async (req, res) => {
   try {
     const result = await cognitoClient.send(getUserCommand);
     // Extract user attributes and metadata from the result
-    // console.log("result:", result);
     const email = result.UserAttributes[0].Value;
     const userId = result.Username;
-    const existingUserIndex = users.findIndex((user) => user.email === email);
+
+    // Find the user in the database
+    const existingUser = await User.findOne({ email: email });
 
     let name = "";
-    // If the user already exists, het it's name
-    if (existingUserIndex !== -1) {
-      name = users[existingUserIndex].name;
+    if (existingUser) {
+      name = existingUser.name;
     }
 
     return res.status(200).json({ email, userId, name });
@@ -417,10 +424,8 @@ export const changePassword = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   const { username } = req.body;
-
   const accessToken = req.cookies.accessToken;
 
-  // Calculate secret hash
   const secretHash = calculateSecretHash(username, CLIENT_ID, CLIENT_SECRET);
 
   const deleteUserCommand = new DeleteUserCommand({
@@ -431,12 +436,8 @@ export const deleteUser = async (req, res) => {
     // Delete the user from Cognito
     await cognitoClient.send(deleteUserCommand);
 
-    // Remove the user from the local database
-    const index = users.findIndex((user) => user.email === username);
-    if (index !== -1) {
-      users.splice(index, 1);
-      saveUsersToFile(); // Save the updated user database to file
-    }
+    // Delete the user from the MongoDB database
+    await User.findOneAndDelete({ email: username });
 
     return res
       .status(200)
