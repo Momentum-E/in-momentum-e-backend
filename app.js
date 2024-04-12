@@ -12,6 +12,7 @@ const __dirname = dirname(__filename);
 import userAuth from "./routes/userAuth.js";
 import userVehicle from "./routes/userVehicle.js";
 import userData from "./routes/userData.js";
+import userBattery from "./routes/userBattery.js";
 
 import connect from "./config/mongoConfig.js";
 
@@ -38,6 +39,7 @@ connect(MONGODB_URI);
 app.use("/auth", userAuth);
 app.use("/user", userVehicle);
 app.use("/user-data", userData);
+app.use("/user-battery", userBattery);
 
 app.get("/check", (req, res) => {
   return res.status(200).json({ message: "API working" });

@@ -1,5 +1,6 @@
 // Import Mongoose
 import mongoose from "mongoose";
+// import Battery from "../models/battery.js";
 
 // Define the Vehicle schema
 const vehicleSchema = new mongoose.Schema({
@@ -52,6 +53,27 @@ const vehicleSchema = new mongoose.Schema({
     Connected_On: Date,
     Data_Points_Collected: String,
     Average_Miles_Driven: [Number], // Assuming it's an array of numbers
+    Battery: {
+      odometer: String,
+      batteryCapacity: String,
+      vehicleModel: String,
+      modelYear: String,
+      formFactor: String,
+      averageSOC: Number,
+      totalChargingSessions: String,
+      averageChargingRate: String,
+      chargingRate: String,
+      SoH: { type: String, default: null },
+      estimatedDegradation: { type: String, default: null },
+      batteryChemistry: String,
+      SOCRange: String,
+      temperature_High_Low: String,
+      estimatedPowerOutput: String,
+      estimatedCapacityOutput: String,
+      speed_Max_Average: String,
+      avgDailyKmDriven: Number,
+      estimatedDailyEnergyOutput: String
+    },
   },
 });
 
