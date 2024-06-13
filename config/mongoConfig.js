@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Vehicle from "../models/vehicle.js";
-import { otherDemoVehicles } from "../utils/demoVehcileData.js";
+import { otherDemoVehicles } from "../utils/demoVehicleData.js";
 
 const connect = async (uri) => {
   try {
