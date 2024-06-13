@@ -20,7 +20,7 @@ import connect from "./config/mongoConfig.js";
 configDotenv();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://momentum-e.vercel.app"],
   credentials: true, // Enable credentials (cookies, HTTP authentication) for cross-origin requests
 };
 
