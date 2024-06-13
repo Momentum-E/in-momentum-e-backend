@@ -18,9 +18,9 @@ import connect from "./config/mongoConfig.js";
 
 // Load environment variables from .env file
 configDotenv();
-
+// console.log(`https://${process.env.FRONTEND_URI}`);
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://momentum-e.vercel.app"],
+  origin: ["http://localhost:3000", `https://${process.env.FRONTEND_URI}`],
   credentials: true, // Enable credentials (cookies, HTTP authentication) for cross-origin requests
 };
 
